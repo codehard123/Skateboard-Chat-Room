@@ -4,19 +4,21 @@
 <link rel="stylesheet" type="text/css" href="/styles/styling.css" />
 </head>
 <body>
-	<div id='pagewrap'>
-		<h1>Skate Chat Room!</h1>
-		<h3>With socket.io and node.js</h3>
-		<h4>To whisper! A private message type /w + nickname of friend + message!</h4>
-		<div id="nickWrap">
-			<p>Enter a Username:</p>
-			<p id="nickError"></p> <!-- this will display error for duplicate name -->
-			<form id="setNick">
-				<input size="35" id="nickname"></input></br>
-				<input id='submit' type='submit'></input>
-			</form>
+	<div id='mainwrapper'>
+		<div id='pagewrap'>
+			<h1>Skate Chat Room!</h1>
+			<h3>With socket.io and node.js</h3>
+			<h4>To whisper! A private message type /w + nickname of friend + message!</h4>
+			<p>See the beauty of node in action open another tab or broswer and start chatting</p>
+			<div id="nickWrap">
+				<p>Enter a Username:</p><br>
+				<p id="nickError"></p> <!-- this will display error for duplicate name -->
+				<form id="setNick">
+					<input size="35" id="nickname"></input></br><br>
+					<input id='submit' type='submit' value='Join Chat!'></input>
+				</form>
 		</div>
-
+	</div>
 		<div id="contentWrap">
 			<div id="chatWrap">
 				<div id="chat"></div> <!-- This is where chat messages will go -->

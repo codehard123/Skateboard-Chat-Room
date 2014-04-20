@@ -1,18 +1,61 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+body{
+	background: url(Skateboard.jpg);
+	background-size: cover;
+}
+
+#mainwrapper{
+	height: auto;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	color: white;
+	/*background-color: blue;*/
+	text-align: center;
+}
+
+#nickname{
+	text-align: center;
+	border-radius: 6px;
+}
+
 #chat{
 	height:450px;
-	background-color: lightgrey;
+	background-color: white;
+	border-radius: 8px;
+	border: 3px solid white;
+	color: black;
+	height: 350px;
+	width: 400px;
+	margin-right: auto;
+	margin-left: auto;
+	text-align: left;
 	
 }
 #contentWrap{
 	display: none;
 } /*dont want users to start submitting before username*/
 #chatWrap{
-	float: left;
-	border: 3px solid lightblue;
+	position: relative;
 	border-radius: 9px;
 }
+
+#users{
+	color: black;
+	float: right;
+	margin-bottom: 40%;
+	position: absolute;
+	z-index: 10;
+}
 #send-message{
-	background-color: lightgrey;
+	position: relative;
+	background-color: invisible;
+	margin-right: 110px;
+
 }
 .error{
 	color: red;
