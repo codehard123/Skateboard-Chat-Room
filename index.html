@@ -1,0 +1,89 @@
+<html>
+<head>
+	<title>Chat Room</title>
+<link rel="stylesheet" type="text/css" href="/styles/styling.css" />
+</head>
+<body>
+	<div id='pagewrap'>
+		<h1>Skate Chat Room!</h1>
+		<h3>With socket.io and node.js</h3>
+		<h4>To whisper! A private message type /w + nickname of friend + message!</h4>
+		<div id="nickWrap">
+			<p>Enter a Username:</p>
+			<p id="nickError"></p> <!-- this will display error for duplicate name -->
+			<form id="setNick">
+				<input size="35" id="nickname"></input></br>
+				<input id='submit' type='submit'></input>
+			</form>
+		</div>
+
+		<div id="contentWrap">
+			<div id="chatWrap">
+				<div id="chat"></div> <!-- This is where chat messages will go -->
+					<form id="send-message">
+						<input size="35" id="message"></input>
+						<input type='submit'></input>
+					</form>
+			</div>
+			<div id="users"></div> <!-- this will float users to the right -->
+		</div>
+	</div>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script> <!-- files socket.io generates for you when you use it, allows client to connect to server using sockets  -->
+		<script>
+			$(document).ready(function(){
+				var socket = io.connect();
+				var $nickForm = $('#setNick');
+				var $nickError = $('#nickError');
+				var $nickBox = $('#nickname');
+				var $users = $('#users');
+				var $messageForm = $('#send-message');
+				var $messageBox = $('#message');
+				var $chat = $('#chat');
+					// making variables in the beginning because they are not changing. client does not have to look for it each time.
+
+				$nickForm.submit(function(e){
+					e.preventDefault();
+					socket.emit('new user', $nickBox.val(), function(data){
+						if(data)
+						{ //if true is sent back from server
+							$('#nickWrap').hide();
+							$('#contentWrap').show();
+						}
+						else
+						{ //if false is sent back
+							$nickError.html('That username is already taken try again!');
+						}
+					}); // prevent default behavior, checking to see if username is valid. if not valid display message
+					$nickBox.val(''); //clear value in nickname box
+				});
+
+				socket.on('usernames', function(data){
+					//takes nicknames from server side and adds them to list
+					var html = '';
+					for (i = 0; i < data.length; i++) 
+					{
+						html +=	data[i] + '<br/>'
+					};
+					$users.html(html); // now add to users div, add in string we created
+				});
+
+				$messageForm.submit(function(e){
+						e.preventDefault(); // just want message to be sent to server don't submit and refresh the page
+						socket.emit('send message', $messageBox.val(), function(data){
+							$chat.append('<span class="error">' + data +'</span><br/>')
+						}); //just gets value of message
+						$messageBox.val(''); //clear message box
+
+					}); //every time message is submitted it goes to the server
+				socket.on('new message', function(data){
+					$chat.append('<span class="msg"><b>' + data.nick + ': </b>' + data.msg + '</span><br/>'); //parsing out data from the new message object
+				});
+
+				socket.on('whisper', function(data){ // listen for whisper
+					$chat.append('<span class="whisper"><b>' + data.nick + ': </b>' + data.msg + '</span><br/>');
+				});
+			});
+		</script>
+</body>
+</html>
