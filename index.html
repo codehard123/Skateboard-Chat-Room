@@ -4,7 +4,6 @@
 <link rel="stylesheet" type="text/css" href="/styles/styling.css" />
 </head>
 <body>
-	<div id='mainwrapper'>
 		<div id='pagewrap'>
 			<h1>Skate Chat Room!</h1>
 			<h3>With socket.io and node.js</h3>
@@ -14,22 +13,20 @@
 				<p>Enter a Username:</p><br>
 				<p id="nickError"></p> <!-- this will display error for duplicate name -->
 				<form id="setNick">
-					<input size="35" id="nickname"></input></br><br>
-					<input id='submit' type='submit' value='Join Chat!'></input>
+					<input size="35" id="nickname"><br><br>
+					<input class="button" type='submit' value="Let's Skate!">
 				</form>
-		</div>
-	</div>
-		<div id="contentWrap">
-			<div id="chatWrap">
-				<div id="chat"></div> <!-- This is where chat messages will go -->
-					<form id="send-message">
-						<input size="35" id="message"></input>
-						<input type='submit'></input>
-					</form>
 			</div>
-			<div id="users"></div> <!-- this will float users to the right -->
-		</div>
-	</div>
+			<div id="contentWrap">
+				<div id="chatWrap">
+					<div id="chat"><div id="users"></div></div> <!-- This is where chat messages will go -->
+						<form id="send-message">
+							<input size="35" id="message" />
+							<input class='button' type='submit' value='Stoked!' />
+						</form>
+				</div>
+			</div>
+		</div>	
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="/socket.io/socket.io.js"></script> <!-- files socket.io generates for you when you use it, allows client to connect to server using sockets  -->
 		<script>
@@ -63,11 +60,11 @@
 				socket.on('usernames', function(data){
 					//takes nicknames from server side and adds them to list
 					var html = '';
-					for (i = 0; i < data.length; i++) 
+					for (i = 0; i < data.length; i++)
 					{
-						html +=	data[i] + '<br/>'
+						html += data[i] + '<br/>'
 					};
-					$users.html(html); // now add to users div, add in string we created
+					$users.html('<h2>Users </h2>' + html); // now add to users div, add in string we created
 				});
 
 				$messageForm.submit(function(e){
