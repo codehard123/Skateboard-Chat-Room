@@ -2,6 +2,19 @@
 <head>
 	<title>Chat Room</title>
 <link rel="stylesheet" type="text/css" href="/styles/styling.css" />
+
+<script language="javascript" type="text/javascript">
+
+function ScrollPage() {
+
+	var pageHeight = document.body.scrollHeight;
+	window.scrollTo(0, pageHeight/2)
+
+}
+
+</script>
+
+
 </head>
 <body>
 		<div id='pagewrap'>
@@ -21,8 +34,8 @@
 				<div id="chatWrap">
 					<div id="chat"><div id="users"></div></div> <!-- This is where chat messages will go -->
 						<form id="send-message">
-							<input size="35" id="message" />
-							<input class='button' type='submit' value='Stoked!' />
+							<input size="35" id="message" /><br>
+							<input class='button' type='submit' value='Stoked!' onclick='ScrollPage()' />
 						</form>
 				</div>
 			</div>

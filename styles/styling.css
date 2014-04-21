@@ -53,6 +53,14 @@ body{
 	text-align: center;
 }
 
+#send-message{
+  width: 400px;
+}
+
+  #send-message input{
+    border-radius: 6px;
+  }
+  
 .error{
 	color: red;
 }
